@@ -1,0 +1,20 @@
+# Core ML Libraries
+torch
+transformers
+datasets
+scikit-learn
+numpy
+
+# Web UI
+gradio
+
+# Utilities
+tqdm
+pandas
+
+# Optional but helpful
+sentencepiece
+accelerate
+
+# Jupyter Notebook (if running locally)
+ipykernel
