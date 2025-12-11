@@ -58,7 +58,40 @@
 
 
 # function in pyhton
-def func(num1,num2,num3):
-    res = num1 *num2 /num3
-    return res
-print(func( 4,5,6))
+# def func(num1,num2,num3):
+#     res = num1 *num2 /num3
+#     return res
+# print(func( 4,5,6))
+
+
+def add_item(menu, item,quanity=1):
+    if item in menu:
+        menu[item] += quanity
+        
+    else:
+        menu[item] =quanity
+def calculate_total(menu, price):
+    total_price = 0
+    for item, quanity in menu.items():
+        if item in price:
+            total_price += price[item] 
+        return total_price
+menu = {
+    "burger": 2,
+    "fries": 1
+}
+
+prices = {
+    "burger": 5,
+    "fries": 3
+}
+total_cost = calculate_total(menu, prices)
+print(total_cost)
+def print_receipt(customer_name, menu, *, total):
+     print("---Receipt---")
+     print(f'customer  {customer_name}')
+     print('Items:')
+     for item, quantity in menu.items():
+         print(f'{item} x{quantity}')
+         print(f'Total:  ${total}')
+print_receipt("Negede", menu, total=total_cost)
