@@ -89,3 +89,34 @@ class Bank(Payment):
 Payment1 =[Payment(),Telebir(),Bank()]
 for P in Payment1:
     P.Pay()
+
+# Absracctions
+from abc import ABC, abstractmethod
+#
+# abstract class
+class Superhero(ABC):
+    def __init__(self,name,power):
+        self.name= name
+        self.power = power
+    @abstractmethod
+    def fight_crime(self):
+        pass
+    @abstractmethod
+    def use_power(self):
+        pass
+# concrete class
+class FlyingHero(Superhero):
+    def fight_crime(self):
+        print(f"{self.name} soars into the sky to fight crime!")
+    def use_power(self):
+        print(f"{self.name} soars into the sky to fight crime!")
+class StregthHero(Superhero):
+    def fight_crime(self):
+        print(f"{self.name} soars into the sky to fight crime!")
+    def use_power(self):
+        print(f"{self.name} soars into the sky to fight crime!")
+hero1 = FlyingHero("SkyWing","WindBlast")
+hero_list = [hero1]
+
+for hero in hero_list:
+    hero.fight_crime()
