@@ -73,3 +73,19 @@ class Cat(Animal):
 animals = [Dog(), Cat(),Animal()]
 for a in animals:
     a.speak()
+
+class Payment:
+    def Pay(self):
+        print("Payment through")
+class Telebir(Payment):
+    def Pay(self):
+        
+        print("Payment through Telebir")
+
+class Bank(Payment):
+    def Pay(self):
+        print("Payment through Bank")
+
+Payment1 =[Payment(),Telebir(),Bank()]
+for P in Payment1:
+    P.Pay()
