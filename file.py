@@ -26,71 +26,97 @@
 # That makes the code much cleaner and less error prone.
 
 # So for now, I'm just going to print the reading operation of the file.
-with open('test.txt','r') as file:
-    print(file.read())
+# with open('test.txt','r') as file:
+#     print(file.read())
 
-import os
-import json
+# Exercise: Build Your Own Mini Database (File Edition)
+# Alright, it’s time to take everything you’ve learned about files and JSON and use it to build something cool, a tiny version of a database system!
 
-class Database:
-    def __init__(self, name):
-        self.name = name
+# In this challenge, you’ll simulate how databases store tables and columns, but instead of using SQL or an actual DB engine, you’ll do it entirely with Python, JSON, and files.
 
-        if os.path.exists(name):
-            raise Exception(f"Database '{name}' already exists!")
-        else:
-            os.mkdir(name)
-            print(f"Database '{name}' created.")
+# import os
+# import json
+# class Database:
+#     def __init__(self, name):
+#         self.name = name
 
-    def create_table(self, table_name):
-        table_path = os.path.join(self.name, f"{table_name}.json")
+#         if os.path.exists(name):
+#             raise Exception(f"Database '{name}' already exists!")
+#         else:
+#             os.mkdir(name)
+#             print(f"Database '{name}' created.")
 
-        if os.path.exists(table_path):
-            raise Exception(f"Table '{table_name}' already exists.")
+#     def create_table(self, table_name):
+#         table_path = os.path.join(self.name, f"{table_name}.json")
 
-        with open(table_path, "w") as file:
-            json.dump({"columns": []}, file, indent=2)
+#         if os.path.exists(table_path):
+#             raise Exception(f"Table '{table_name}' already exists.")
 
-        print(f"Table '{table_name}' created.")
+#         with open(table_path, "w") as file:
+#             json.dump({"columns": []}, file, indent=2)
 
-    def add_column(self, table_name, column_name):
-        table_path = os.path.join(self.name, f"{table_name}.json")
+#         print(f"Table '{table_name}' created.")
 
-        if not os.path.exists(table_path):
-            raise Exception(f"Table '{table_name}' does not exist.")
+#     def add_column(self, table_name, column_name):
+#         table_path = os.path.join(self.name, f"{table_name}.json")
 
-        # Read existing table data
-        with open(table_path, "r") as file:
-            data = json.load(file)
+#         if not os.path.exists(table_path):
+#             raise Exception(f"Table '{table_name}' does not exist.")
 
-        # Prevent duplicate columns
-        if column_name in data["columns"]:
-            raise Exception(f"Column '{column_name}' already exists.")
+#         # Read existing table data
+#         with open(table_path, "r") as file:
+#             data = json.load(file)
 
-        data["columns"].append(column_name)
+#         # Prevent duplicate columns
+#         if column_name in data["columns"]:
+#             raise Exception(f"Column '{column_name}' already exists.")
 
-        # Write updated data back
-        with open(table_path, "w") as file:
-            json.dump(data, file, indent=2)
+#         data["columns"].append(column_name)
 
-        print(f"Column '{column_name}' added to table '{table_name}'.")
+#         # Write updated data back
+#         with open(table_path, "w") as file:
+#             json.dump(data, file, indent=2)
 
-    def show_tables(self):
-        tables = [
-            file.replace(".json","")
-            for file in os.listdir(self.name)
-            if file.endswith(".json")
-        ]
-        print("Tables:")
-        for table in tables:
-            print("-", table)
-db = Database("company_db")
-db.create_table("employees")
-db.show_tables()
-db.add_columns("employees", "id")
-db.add_columns("employees", "name")
-db.add_columns("employees", "salary")
+#         print(f"Column '{column_name}' added to table '{table_name}'.")
+
+#     def show_tables(self):
+#         tables = [
+#             file.replace(".json","")
+#             for file in os.listdir(self.name)
+#             if file.endswith(".json")
+#         ]
+#         print("Tables:")
+#         for table in tables:
+#             print("-", table)
+# db = Database("company_db")
+# db.create_table("employees")
+# db.show_tables()
+# db.add_columns("employees", "id")
+# db.add_columns("employees", "name")
+# db.add_columns("employees", "salary")
 
     
+# Journal Keeper
+# You’ve been hired by a mysterious client who wants to keep a daily journal of their thoughts but they’re too lazy to manage the files themselves. Your job is to build a small program that takes care of their journal entries.
 
-              
+class Journal:
+    def __init__(self,filename= "jornal.txt"):
+        self.filename = filename
+        # create file if it does not exist
+        with open(self.filename, 'a'):
+            pass
+    def add_entry(self):
+        entry = input("Enter your Jornal")
+
+        # append new entry
+        with open(self.filename, 'a') as file:
+            file.write(entry + "\n")
+
+        # read and display all entries
+        print("\n --- Journal Entites ---")
+        with open(self.filename,'r') as file:
+            print(file.read())
+
+journal = Journal()
+journal.add_entry()
+        
