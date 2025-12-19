@@ -45,14 +45,17 @@ class Database:
         except ValueError as e:
             return f"An error occured while trying to add your data: {e}"
         
-    def select(self,table_name,filters):
+    def select(self,table_name,filters, limit=None):
         path = os.path.join(self.name,table_name+".json")
         if not os.path.exists(path) or os.path.getsize(path) == 0:
             raise ValueError('The table does not exist')
         table_data = json.load(open(path))['rows']
         # filter rows based on the provided filters
         rows = [row for row in table_data if  all(row[key] == value for key, value in filters.items())]
-        return table_data
+# apply limit if specified
+        if limit is not None:
+            rows = rows[:limit]
+        return rows
 db1 = Database("db1")
 db1.create_table("users")
 db1.add_colums("users",["username","password"])
